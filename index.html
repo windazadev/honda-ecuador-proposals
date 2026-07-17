@@ -9,10 +9,7 @@
         :root {
             --honda-red: #E4002B;
             --bg-color: #030303;
-            --surface: #0a0a0a;
-            --surface-hover: #121212;
             --text: #ffffff;
-            --text-secondary: #666666;
         }
 
         * {
@@ -28,154 +25,171 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-image: 
-                radial-gradient(circle at 50% -20%, rgba(228, 0, 43, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-            overflow: hidden;
+            overflow-x: hidden;
+            margin: 0;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 70px;
-            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 40px 20px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            pointer-events: none;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            margin-bottom: 16px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
-        .header p {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .container {
+        .gallery {
             display: flex;
-            gap: 24px;
-            max-width: 1000px;
-            width: 100%;
-            padding: 0 24px;
-            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+            height: 100vh;
+            width: 100vw;
         }
 
-        .card {
+        .gallery-item {
             flex: 1;
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 4px;
-            padding: 60px 40px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            background: #111;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.8s ease;
+            filter: brightness(0.4) saturate(0.8);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.4) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            transition: background 0.8s ease;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(228,0,43,0.08) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        .content-box {
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(228,0,43,0.2);
-            background: var(--surface-hover);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card h2 {
-            font-size: 1.4rem;
+        .gallery-item h2 {
+            font-size: 3rem;
             font-weight: 300;
-            letter-spacing: 0.15em;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 0.1em;
+            margin-bottom: 25px;
             text-transform: uppercase;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .card span.btn {
+        .gallery-item span.btn {
             display: inline-block;
-            padding: 14px 40px;
-            border: 1px solid rgba(255,255,255,0.15);
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
+            padding: 16px 44px;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            z-index: 1;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(15px);
         }
 
-        .card:hover span.btn {
+        /* Hover Motion Effects */
+        .gallery-item:hover img {
+            transform: scale(1.06);
+            filter: brightness(0.9) saturate(1.1);
+        }
+
+        .gallery-item:hover .overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .gallery-item:hover .content-box {
+            transform: translateY(0);
+        }
+        
+        .gallery-item:hover h2 {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover span.btn {
+            opacity: 1;
+            transform: translateY(0);
             background: var(--text);
-            border-color: var(--text);
             color: #000;
-            font-weight: 500;
+            border-color: var(--text);
+            font-weight: 600;
         }
 
-        @media (max-width: 768px) {
-            .container {
+        @media (max-width: 820px) {
+            .gallery {
                 flex-direction: column;
             }
-            .card {
-                padding: 50px 30px;
+            .header {
+                padding: 25px;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
             }
-            .header h1 {
-                font-size: 1.8rem;
+            .gallery-item img {
+                filter: brightness(0.6);
             }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+            .gallery-item h2 {
+                font-size: 2.2rem;
+            }
+            .gallery-item span.btn {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .content-box {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Honda Ecuador</h1>
-        <p>Proyectos en revisión</p>
     </div>
     
-    <div class="container">
-        <a href="/propuesta-web/" class="card">
-            <h2>Propuesta 1</h2>
-            <span class="btn">Visualizar</span>
+    <div class="gallery">
+        <a href="/propuesta-web/" class="gallery-item">
+            <img src="preview-assets/propuesta-1.png" alt="Vista previa Propuesta 1">
+            <div class="overlay">
+                <div class="content-box">
+                    <h2>Propuesta 1</h2>
+                    <span class="btn">Visualizar</span>
+                </div>
+            </div>
         </a>
         
-        <a href="/propuesta-web-2/" class="card">
-            <h2>Propuesta 2</h2>
-            <span class="btn">Visualizar</span>
+        <a href="/propuesta-web-2/" class="gallery-item">
+            <img src="preview-assets/propuesta-2.png" alt="Vista previa Propuesta 2">
+            <div class="overlay">
+                <div class="content-box">
+                    <h2>Propuesta 2</h2>
+                    <span class="btn">Visualizar</span>
+                </div>
+            </div>
         </a>
     </div>
 </body>
