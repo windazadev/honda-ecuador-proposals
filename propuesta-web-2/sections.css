@@ -526,6 +526,10 @@
   border-radius: 0;
 }
 
+.support-card:first-child {
+  padding-right: 16px;
+}
+
 .support-card:last-child {
   border-right: none;
 }
