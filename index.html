@@ -304,18 +304,18 @@
         function updateArrows() {
             if (window.innerWidth > 820) {
                 // Horizontal scrolling
-                const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
-                arrowLeft.style.display = slider.scrollLeft > 10 ? 'flex' : 'none';
-                arrowRight.style.display = slider.scrollLeft >= maxScrollLeft - 10 ? 'none' : 'flex';
+                const maxScrollLeft = document.documentElement.scrollWidth - window.innerWidth;
+                arrowLeft.style.display = window.scrollX > 10 ? 'flex' : 'none';
+                arrowRight.style.display = window.scrollX >= maxScrollLeft - 10 ? 'none' : 'flex';
             } else {
                 // Vertical scrolling on mobile
-                const maxScrollTop = slider.scrollHeight - slider.clientHeight;
-                arrowLeft.style.display = slider.scrollTop > 10 ? 'flex' : 'none';
-                arrowRight.style.display = slider.scrollTop >= maxScrollTop - 10 ? 'none' : 'flex';
+                const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+                arrowLeft.style.display = window.scrollY > 10 ? 'flex' : 'none';
+                arrowRight.style.display = window.scrollY >= maxScrollTop - 10 ? 'none' : 'flex';
             }
         }
 
-        slider.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('scroll', updateArrows, { passive: true });
         window.addEventListener('resize', updateArrows, { passive: true });
         
         let isDown = false;
