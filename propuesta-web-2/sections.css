@@ -511,7 +511,7 @@
 .support-grid {
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: auto repeat(3, 1fr);
   gap: 0;
 }
 
@@ -575,7 +575,7 @@
 
 @media (max-width: 1024px) {
   .support-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: auto 1fr;
     gap: 0;
   }
   .support-card {
