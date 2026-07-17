@@ -99,15 +99,15 @@
             position: fixed;
             right: 60px;
             bottom: 40px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--bg);
-            z-index: 10;
+            z-index: 20;
             cursor: pointer;
             background: #ffffff;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -160,23 +160,42 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            background: #000; /* Dark background under images */
         }
 
         .project-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-            /* Heavy blur by default to tease the client */
-            filter: blur(15px) brightness(0.6);
-            /* Scale up to hide blurred edges */
-            transform: scale(1.1);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
         }
 
-        .project:hover .project-image img {
-            /* Unblurs slightly on hover, but still keeps it hidden */
-            filter: blur(6px) brightness(0.8);
-            transform: scale(1.15);
+        /* The particle scattered image */
+        .img-particle {
+            filter: url('#particle-noise') brightness(0.6);
+            opacity: 1;
+            transform: scale(1.05); /* hide edge bleeding from filter */
+            z-index: 2;
+        }
+
+        /* The clean image underneath */
+        .img-clean {
+            opacity: 0;
+            transform: scale(1);
+            z-index: 1;
+        }
+
+        /* Reveal the clean image on hover */
+        .project:hover .img-particle {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+        .project:hover .img-clean {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .project h2 {
@@ -188,7 +207,7 @@
             font-weight: 700;
             line-height: 1.05;
             text-transform: uppercase;
-            z-index: 2;
+            z-index: 3;
             pointer-events: none;
             color: #fff;
             text-shadow: 0 5px 20px rgba(0,0,0,0.5);
@@ -249,6 +268,14 @@
 <body>
     <div class="noise"></div>
     
+    <!-- SVG Filter for the Particle Effect -->
+    <svg style="width: 0; height: 0; position: absolute;" aria-hidden="true">
+        <filter id="particle-noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="3" stitchTiles="stitch" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
     <header>
         <div class="logo-text">Honda Ecuador</div>
     </header>
@@ -272,14 +299,18 @@
         <a href="/propuesta-web/" class="project">
             <h2>PROPUESTA<br>1</h2>
             <div class="project-image">
-                <img src="preview-assets/propuesta-1.png" alt="Propuesta 1">
+                <!-- Clean image -->
+                <img src="preview-assets/propuesta-1.png" alt="Propuesta 1" class="img-clean">
+                <!-- Particle distorted image on top -->
+                <img src="preview-assets/propuesta-1.png" alt="" class="img-particle" aria-hidden="true">
             </div>
         </a>
 
         <a href="/propuesta-web-2/" class="project">
             <h2>PROPUESTA<br>2</h2>
             <div class="project-image">
-                <img src="preview-assets/propuesta-2.png" alt="Propuesta 2">
+                <img src="preview-assets/propuesta-2.png" alt="Propuesta 2" class="img-clean">
+                <img src="preview-assets/propuesta-2.png" alt="" class="img-particle" aria-hidden="true">
             </div>
         </a>
 
@@ -330,19 +361,29 @@
             }
         }, { passive: true });
 
-        // Button functionality to go to next
+        // Robust slideNext functionality that works regardless of scroll container issues
         function slideNext() {
-            if(window.innerWidth > 820) {
-                window.scrollBy({
-                    left: window.innerWidth * 0.6,
-                    behavior: 'smooth'
-                });
+            const projects = document.querySelectorAll('.project');
+            if (window.innerWidth > 820) {
+                // Horizontal desktop logic
+                for (let p of projects) {
+                    let rect = p.getBoundingClientRect();
+                    // If the project is mostly off-screen to the right
+                    if (rect.left > window.innerWidth / 2) {
+                        p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        break;
+                    }
+                }
             } else {
-                // Scroll down on mobile
-                window.scrollBy({
-                    top: window.innerHeight * 0.6,
-                    behavior: 'smooth'
-                });
+                // Vertical mobile logic
+                for (let p of projects) {
+                    let rect = p.getBoundingClientRect();
+                    // If the project is mostly off-screen below
+                    if (rect.top > window.innerHeight / 2) {
+                        p.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'start' });
+                        break;
+                    }
+                }
             }
         }
     </script>
