@@ -606,6 +606,8 @@
   margin: 0 auto;
   padding-top: clamp(104px, 10vw, 160px);
   padding-bottom: clamp(110px, 11vw, 176px);
+  padding-left: 16px;
+  padding-right: 16px;
   display: grid;
   grid-template-columns: minmax(280px, 0.72fr) minmax(600px, 1.28fr);
   align-items: start;
@@ -768,7 +770,7 @@
    CONTACT SECTION
    ========================================================================== */
 .contact-section {
-  padding: 100px 5%;
+  padding: 100px 0;
   background-color: var(--background);
   color: var(--text);
   border-top: 1px solid var(--border);
@@ -776,7 +778,7 @@
 
 .contact-container {
   max-width: 100%;
-  padding: 0 40px;
+  padding: 0 16px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
