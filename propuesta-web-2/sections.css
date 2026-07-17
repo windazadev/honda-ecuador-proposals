@@ -513,8 +513,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  background: var(--background);
-  border: 1px solid var(--border);
 }
 
 .support-card {
@@ -526,15 +524,10 @@
   border: none;
   border-right: 1px solid var(--border);
   border-radius: 0;
-  transition: background-color 220ms ease;
 }
 
 .support-card:last-child {
   border-right: none;
-}
-
-.support-card:hover {
-  background: var(--surface-soft);
 }
 
 .support-card > i {
