@@ -4,59 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Honda Ecuador - Propuestas Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        :root {
+            --honda-red: #E4002B;
+            --bg-color: #030303;
+            --surface: #0a0a0a;
+            --surface-hover: #121212;
+            --text: #ffffff;
+            --text-secondary: #666666;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(228, 0, 43, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+            overflow: hidden;
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 70px;
+            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        h1 {
+
+        .header h1 {
+            font-size: 2.2rem;
             font-weight: 300;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
+            letter-spacing: 0.3em;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.95);
         }
-        .proposals {
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .container {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 24px;
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 24px;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        .card {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 4px;
+            padding: 60px 40px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
-        a {
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(228,0,43,0.08) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(228,0,43,0.2);
+            background: var(--surface-hover);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+        }
+
+        .card span.btn {
             display: inline-block;
-            padding: 15px 30px;
-            background-color: #E4002B; /* Honda Red */
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 14px 40px;
+            border: 1px solid rgba(255,255,255,0.15);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .card:hover span.btn {
+            background: var(--text);
+            border-color: var(--text);
+            color: #000;
             font-weight: 500;
         }
-        a:hover {
-            background-color: #C00020;
-            transform: translateY(-2px);
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .card {
+                padding: 50px 30px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
         }
-        p {
-            margin-top: 50px;
-            color: #888;
-            font-size: 0.9rem;
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
     </style>
 </head>
 <body>
-    <h1>HONDA ECUADOR</h1>
-    <div class="proposals">
-        <a href="/propuesta-web/">Ver Propuesta 1 (Original)</a>
-        <a href="/propuesta-web-2/">Ver Propuesta 2 (Cinemática)</a>
+    <div class="header">
+        <h1>Honda Ecuador</h1>
+        <p>Proyectos en revisión</p>
     </div>
-    <p>Seleccione una de las propuestas para visualizarla.</p>
+    
+    <div class="container">
+        <a href="/propuesta-web/" class="card">
+            <h2>Propuesta 1</h2>
+            <span class="btn">Visualizar</span>
+        </a>
+        
+        <a href="/propuesta-web-2/" class="card">
+            <h2>Propuesta 2</h2>
+            <span class="btn">Visualizar</span>
+        </a>
+    </div>
 </body>
 </html>
