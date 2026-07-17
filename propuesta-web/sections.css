@@ -672,6 +672,16 @@
   font-weight: 600;
 }
 
+.support-card-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.support-card-links a {
+  margin-top: 0 !important;
+}
+
 .support-card a:hover {
   color: var(--brand-red-dark);
 }
@@ -707,7 +717,8 @@
     grid-row: 1;
   }
 
-  .support-card a {
+  .support-card > a,
+  .support-card-links {
     grid-column: 3;
     grid-row: 2;
     min-height: 36px;
@@ -743,7 +754,8 @@
   }
 
   .support-card p,
-  .support-card a {
+  .support-card > a,
+  .support-card-links {
     grid-column: 2;
   }
 

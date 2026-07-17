@@ -555,8 +555,18 @@
   line-height: 1.6;
 }
 
-.support-card a {
+.support-card > a,
+.support-card-links {
   margin-top: auto;
+}
+
+.support-card-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.support-card a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
