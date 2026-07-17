@@ -535,7 +535,7 @@
 }
 
 .support-card > i {
-  color: var(--brand-red);
+  color: var(--text);
   margin-bottom: 20px;
   font-size: 36px;
 }
