@@ -94,10 +94,9 @@
             color: #ccc;
         }
         
-        /* Arrow button moved to bottom right and highly visible */
-        .arrow-right {
+        /* Arrow buttons moved to bottom and highly visible */
+        .arrow-right, .arrow-left {
             position: fixed;
-            right: 60px;
             bottom: 40px;
             font-size: 1.5rem;
             color: var(--bg);
@@ -112,9 +111,11 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s, background 0.3s, opacity 0.3s;
         }
-        .arrow-right:hover {
+        .arrow-right { right: 60px; }
+        .arrow-left { left: 60px; display: none; }
+        .arrow-right:hover, .arrow-left:hover {
             transform: scale(1.1);
             background: #e0e0e0;
         }
@@ -231,13 +232,22 @@
             .drag-label, .line, .menu-label {
                 display: none;
             }
+            .arrow-right, .arrow-left {
+                bottom: 20px;
+                transform: rotate(90deg); /* Point down/up on mobile */
+            }
             .arrow-right {
                 right: 20px;
-                bottom: 20px;
-                transform: rotate(90deg); /* Point down on mobile */
+            }
+            .arrow-left {
+                left: 20px;
+                transform: rotate(-90deg);
             }
             .arrow-right:hover {
                 transform: rotate(90deg) scale(1.1);
+            }
+            .arrow-left:hover {
+                transform: rotate(-90deg) scale(1.1);
             }
             header {
                 background: linear-gradient(to bottom, var(--bg), transparent);
@@ -257,6 +267,10 @@
     
 
 
+    <!-- Visible arrow button at the bottom left -->
+    <button class="arrow-left" onclick="slidePrev()">
+        &larr;
+    </button>
     <!-- Visible arrow button at the bottom right -->
     <button class="arrow-right" onclick="slideNext()">
         &rarr;
@@ -284,6 +298,26 @@
 
     <script>
         const slider = document.querySelector('.scroll-container');
+        const arrowLeft = document.querySelector('.arrow-left');
+        const arrowRight = document.querySelector('.arrow-right');
+
+        function updateArrows() {
+            if (window.innerWidth > 820) {
+                // Horizontal scrolling
+                const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+                arrowLeft.style.display = slider.scrollLeft > 10 ? 'flex' : 'none';
+                arrowRight.style.display = slider.scrollLeft >= maxScrollLeft - 10 ? 'none' : 'flex';
+            } else {
+                // Vertical scrolling on mobile
+                const maxScrollTop = slider.scrollHeight - slider.clientHeight;
+                arrowLeft.style.display = slider.scrollTop > 10 ? 'flex' : 'none';
+                arrowRight.style.display = slider.scrollTop >= maxScrollTop - 10 ? 'none' : 'flex';
+            }
+        }
+
+        slider.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('resize', updateArrows, { passive: true });
+        
         let isDown = false;
         let startX;
         let scrollLeft;
@@ -352,6 +386,37 @@
                 }
             }
         }
+
+        // Robust slidePrev functionality
+        function slidePrev() {
+            const projects = document.querySelectorAll('.project');
+            if (window.innerWidth > 820) {
+                // Horizontal desktop logic: iterate backwards
+                for (let i = projects.length - 1; i >= 0; i--) {
+                    let p = projects[i];
+                    let rect = p.getBoundingClientRect();
+                    // If the project is mostly off-screen to the left
+                    if (rect.right < window.innerWidth / 2) {
+                        p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        break;
+                    }
+                }
+            } else {
+                // Vertical mobile logic: iterate backwards
+                for (let i = projects.length - 1; i >= 0; i--) {
+                    let p = projects[i];
+                    let rect = p.getBoundingClientRect();
+                    // If the project is mostly off-screen above
+                    if (rect.bottom < window.innerHeight / 2) {
+                        p.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'start' });
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Initial setup
+        updateArrows();
     </script>
 </body>
 </html>
