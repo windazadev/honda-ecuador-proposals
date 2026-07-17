@@ -3,194 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Honda Ecuador - Propuestas Web</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Honda Ecuador - Proyectos</title>
+    <!-- Use a condensed/impactful font for the titles -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --honda-red: #E4002B;
-            --bg-color: #030303;
-            --text: #ffffff;
+            --bg: #121213;
+            --text: #F0F0F0;
         }
 
-        * {
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg);
             color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            margin: 0;
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .header h1 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.95);
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-
-        .gallery {
-            display: flex;
+            font-family: 'Inter', sans-serif;
             height: 100vh;
             width: 100vw;
+            overflow-x: auto;
+            overflow-y: hidden;
+            /* Hide scrollbar */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
         }
 
-        .gallery-item {
-            flex: 1;
+        /* Subtle noise texture */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Top Header */
+        header {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #ccc;
+        }
+
+        .menu-label {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 5;
+        }
+
+        .drag-label {
+            position: fixed;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #888;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .drag-label span {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ccc;
+        }
+
+        /* Background Line */
+        .line {
+            position: fixed;
+            top: 60%;
+            left: 0;
+            width: 100vw;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            z-index: 0;
+        }
+
+        /* Horizontal Scroll Container */
+        .scroll-container {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            padding-left: 25vw;
+            padding-right: 25vw;
+            gap: 20vw;
+            width: max-content;
+        }
+
+        .project {
             position: relative;
-            overflow: hidden;
-            display: block;
             text-decoration: none;
-            color: white;
+            color: inherit;
+            display: flex;
+            align-items: center;
             cursor: pointer;
-            background: #111;
+            z-index: 2;
         }
 
-        .gallery-item img {
+        .project-image {
+            width: 55vw;
+            max-width: 800px;
+            height: 55vh;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
-            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.8s ease;
-            filter: brightness(0.4) saturate(0.8);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+            filter: brightness(0.85) grayscale(20%);
         }
 
-        .overlay {
+        .project:hover .project-image img {
+            transform: scale(1.05);
+            filter: brightness(1) grayscale(0%);
+        }
+
+        .project h2 {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.4) 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.8s ease;
-        }
-
-        .content-box {
-            text-align: center;
-            transform: translateY(20px);
-            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .gallery-item h2 {
-            font-size: 3rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            margin-bottom: 25px;
+            left: -12vw;
+            top: 15%;
+            font-family: 'Oswald', sans-serif;
+            font-size: 7vw;
+            font-weight: 700;
+            line-height: 1.05;
             text-transform: uppercase;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.8);
-            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .gallery-item span.btn {
-            display: inline-block;
-            padding: 16px 44px;
-            border: 1px solid rgba(255,255,255,0.3);
-            font-size: 0.85rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            transform: translateY(15px);
-        }
-
-        /* Hover Motion Effects */
-        .gallery-item:hover img {
-            transform: scale(1.06);
-            filter: brightness(0.9) saturate(1.1);
-        }
-
-        .gallery-item:hover .overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 100%);
-        }
-
-        .gallery-item:hover .content-box {
-            transform: translateY(0);
+            z-index: 2;
+            pointer-events: none;
+            color: #fff;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        .gallery-item:hover h2 {
-            transform: scale(1.05);
+        .project:hover h2 {
+            transform: translateX(20px);
         }
 
-        .gallery-item:hover span.btn {
-            opacity: 1;
-            transform: translateY(0);
-            background: var(--text);
-            color: #000;
-            border-color: var(--text);
-            font-weight: 600;
-        }
-
+        /* Mobile specific adjustments */
         @media (max-width: 820px) {
-            .gallery {
+            .scroll-container {
                 flex-direction: column;
+                justify-content: flex-start;
+                padding: 120px 20px 60px;
+                gap: 100px;
+                height: auto;
+                width: 100%;
             }
-            .header {
-                padding: 25px;
-                background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
             }
-            .gallery-item img {
-                filter: brightness(0.6);
+            .project-image {
+                width: 90vw;
+                height: 45vh;
             }
-            .gallery-item h2 {
-                font-size: 2.2rem;
+            .project h2 {
+                font-size: 4rem;
+                left: 10px;
+                top: -40px;
+                text-shadow: 0 4px 20px rgba(0,0,0,0.8);
             }
-            .gallery-item span.btn {
-                opacity: 1;
-                transform: translateY(0);
+            .drag-label, .line, .menu-label {
+                display: none;
             }
-            .content-box {
-                transform: translateY(0);
+            header {
+                background: linear-gradient(to bottom, var(--bg), transparent);
+                padding-bottom: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Honda Ecuador</h1>
-    </div>
+    <div class="noise"></div>
     
-    <div class="gallery">
-        <a href="/propuesta-web/" class="gallery-item">
-            <img src="preview-assets/propuesta-1.png" alt="Vista previa Propuesta 1">
-            <div class="overlay">
-                <div class="content-box">
-                    <h2>Propuesta 1</h2>
-                    <span class="btn">Visualizar</span>
-                </div>
-            </div>
-        </a>
-        
-        <a href="/propuesta-web-2/" class="gallery-item">
-            <img src="preview-assets/propuesta-2.png" alt="Vista previa Propuesta 2">
-            <div class="overlay">
-                <div class="content-box">
-                    <h2>Propuesta 2</h2>
-                    <span class="btn">Visualizar</span>
-                </div>
-            </div>
-        </a>
+    <header>
+        <div class="logo-text">Honda Ecuador</div>
+    </header>
+
+    <div class="menu-label">Menú</div>
+    
+    <div class="drag-label">
+        Explorar
+        <span>Arrastra para navegar</span>
     </div>
+
+    <div class="line"></div>
+
+    <div class="scroll-container">
+        
+        <a href="/propuesta-web/" class="project">
+            <h2>PROPUESTA<br>1</h2>
+            <div class="project-image">
+                <img src="preview-assets/propuesta-1.png" alt="Propuesta 1">
+            </div>
+        </a>
+
+        <a href="/propuesta-web-2/" class="project">
+            <h2>PROPUESTA<br>2</h2>
+            <div class="project-image">
+                <img src="preview-assets/propuesta-2.png" alt="Propuesta 2">
+            </div>
+        </a>
+
+    </div>
+
+    <!-- Script to enable click-and-drag horizontal scrolling on desktop -->
+    <script>
+        const slider = document.querySelector('.scroll-container');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        // Ensure vertical scrolling is blocked on desktop
+        if(window.innerWidth > 820) {
+            document.body.style.overflowY = 'hidden';
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'default';
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'default';
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; 
+            window.scrollTo(scrollLeft - walk, 0);
+        });
+        
+        // Enable mouse wheel horizontal scrolling
+        window.addEventListener('wheel', (e) => {
+            if(window.innerWidth > 820) {
+                // Determine scrolling direction and move horizontally
+                e.preventDefault();
+                window.scrollBy({
+                    left: e.deltaY > 0 ? 100 : -100,
+                    behavior: 'auto'
+                });
+            }
+        }, { passive: false });
+    </script>
 </body>
 </html>
