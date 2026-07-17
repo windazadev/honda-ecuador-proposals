@@ -530,8 +530,13 @@
   padding-left: 56px;
 }
 
+.support-card:first-child {
+  padding-left: 0 !important;
+}
+
 .support-card:last-child {
   border-right: none;
+  padding-right: 0 !important;
 }
 
 .support-card > i {
@@ -582,6 +587,7 @@
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding-left: 32px !important;
+    padding-right: 32px !important;
   }
   .support-card:nth-child(2n) {
     border-right: none;
@@ -590,6 +596,9 @@
   .support-card:nth-child(n+3) {
     border-bottom: none;
   }
+  .support-card:first-child {
+    padding-left: 0 !important;
+  }
 }
 
 @media (max-width: 580px) {
@@ -597,7 +606,7 @@
     grid-template-columns: 1fr;
     gap: 0;
   }
-  .support-card {
+  .support-card, .support-card:first-child, .support-card:last-child {
     padding: 28px 24px !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border);
