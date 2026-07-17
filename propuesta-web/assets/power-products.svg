@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración técnica de potencia</title>
+  <desc id="desc">Formas geométricas inspiradas en un motor y el flujo de energía.</desc>
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <path opacity=".16" stroke-width="1.5" d="M94 445c124-20 219-81 285-183 63-96 151-154 273-171"/>
+    <path opacity=".24" stroke-width="1.5" d="M76 492c151-31 261-104 331-218C468 174 556 111 681 88"/>
+    <path opacity=".12" stroke-width="1.5" d="M170 515c94-42 165-104 213-186 68-116 168-193 299-230"/>
+    <circle cx="510" cy="260" r="117" opacity=".26" stroke-width="2"/>
+    <circle cx="510" cy="260" r="72" opacity=".46" stroke-width="2"/>
+    <circle cx="510" cy="260" r="23" fill="#fff" stroke-width="0"/>
+    <path opacity=".92" stroke-width="12" d="M510 166v31M510 323v31M416 260h31M573 260h31M444 194l22 22M555 305l22 22M444 327l22-22M555 216l22-22"/>
+    <path opacity=".9" stroke-width="3" d="M509 204c30 0 55 25 55 56s-25 56-55 56-55-25-55-56 25-56 55-56Z"/>
+    <path opacity=".16" stroke-width="26" d="M653 391 711 449M635 409l58 58"/>
+  </g>
+</svg>

@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Portal principal de Honda Ecuador — Autos, Motos y Productos de fuerza."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Honda Ecuador — Propuesta 2</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./carousel.css" />
+    <link rel="stylesheet" href="./hero.css" />
+    <link rel="stylesheet" href="./sections.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body class="home-page">
+    <a class="skip-link" href="#contenido">Ir al contenido principal</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Honda Ecuador, inicio">
+          <img
+            src="../propuesta-web/assets/honda-power-of-dreams.png"
+            width="2560"
+            height="580"
+            alt="Honda — The Power of Dreams"
+          />
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Abrir menú principal"
+        >
+          <i class="ph ph-list" aria-hidden="true" style="font-size: 24px; color: inherit;"></i>
+        </button>
+        <nav id="primary-navigation" class="primary-nav" aria-label="Navegación principal">
+          <a class="is-current" href="#universo-honda" aria-current="page">Universo Honda</a>
+          <a href="#soporte">Soporte</a>
+          <a href="#contacto">Contacto</a>
+          <a class="primary-nav__cta primary-nav__cta--mobile" href="#test-drive">Agendar test drive</a>
+        </nav>
+        <a class="header-cta" href="#test-drive">Agendar test drive</a>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- ═══════════════════════════════════════════════════════════════
+           CAROUSEL — Announcement Banners
+           ═══════════════════════════════════════════════════════════════ -->
+      <section class="announcement-carousel" aria-label="Anuncios y promociones">
+        <div class="carousel-track">
+          <div class="carousel-slide is-active" data-slide="0">
+            <img
+              src="./assets/carousel-autos.jpg"
+              width="1920"
+              height="1080"
+              alt="Nuevo Honda WR-V en la ciudad al atardecer"
+              fetchpriority="high"
+            />
+            <div class="carousel-slide-content">
+              <span class="carousel-tag">Lanzamiento exclusivo</span>
+              <h2>Nuevo Honda WR-V.</h2>
+              <p>El SUV que redefine tu camino. Experimenta la combinación perfecta de diseño deportivo, confort inteligente y la máxima seguridad de Honda Sensing.</p>
+              <a href="../propuesta-web/autos/" class="carousel-cta">
+                Explorar WR-V
+                <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide="1">
+            <img
+              src="./assets/carousel-motos.jpg"
+              width="1920"
+              height="1080"
+              alt="Honda CB190R en ruta de montaña"
+            />
+            <div class="carousel-slide-content">
+              <span class="carousel-tag">Poder naked</span>
+              <h2>Nueva Honda CB190R.</h2>
+              <p>Despierta tu instinto deportivo. Con motor de inyección electrónica PGM-FI, suspensión delantera invertida y un agresivo diseño aerodinámico.</p>
+              <a href="../propuesta-web/motos/" class="carousel-cta">
+                Descubrir CB190R
+                <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide="2">
+            <img
+              src="./assets/carousel-power.jpg"
+              width="1920"
+              height="1080"
+              alt="Motobomba Honda WL20XH en campo agrícola"
+            />
+            <div class="carousel-slide-content">
+              <span class="carousel-tag">Rendimiento agrícola</span>
+              <h2>Motobomba WL20XH.</h2>
+              <p>Eficiencia y caudal máximo para tu cultivo. Diseñada para un uso continuo con el motor de 4 tiempos GP160, garantizando bajo consumo y larga vida útil.</p>
+              <a href="../propuesta-web/productos-de-fuerza/" class="carousel-cta">
+                Ver WL20XH
+                <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--prev" aria-label="Slide anterior">
+          <i class="ph ph-caret-left" aria-hidden="true"></i>
+        </button>
+        <button class="carousel-arrow carousel-arrow--next" aria-label="Siguiente slide">
+          <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="carousel-dots" aria-label="Navegación del carrusel">
+          <button class="carousel-dot is-active" aria-label="Slide 1" data-dot="0"></button>
+          <button class="carousel-dot" aria-label="Slide 2" data-dot="1"></button>
+          <button class="carousel-dot" aria-label="Slide 3" data-dot="2"></button>
+        </div>
+
+        <div class="carousel-progress">
+          <div class="carousel-progress-bar"></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           UNIVERSE SECTION — Cards with width hover interaction
+           ═══════════════════════════════════════════════════════════════ -->
+      <section id="universo-honda" class="universe-section" aria-labelledby="universe-title">
+        <div class="universe-inner">
+          <header class="universe-header">
+            <h2 id="universe-title">Todo lo que te mueve, empieza aquí.</h2>
+            <div class="universe-header-right">
+              <p>Explora el universo Honda y encuentra la línea que se adapta a tu estilo de vida. Autos, motos y productos de fuerza con la calidad que nos define.</p>
+            </div>
+          </header>
+
+          <nav class="universe-cards" aria-label="Líneas de Honda Ecuador">
+            <a
+              id="autos"
+              class="universe-card"
+              data-card="autos"
+              href="../propuesta-web/autos/"
+              aria-describedby="autos-desc"
+            >
+              <span class="card-media">
+                <img
+                  src="../propuesta-web/assets/autos-editorial.jpg"
+                  width="1880"
+                  height="836"
+                  alt="Honda WR-V gris frente a arquitectura contemporánea"
+                />
+              </span>
+              <span class="card-body">
+                <strong>Autos</strong>
+                <span id="autos-desc">Diseño, tecnología y confianza para cada camino.</span>
+                <span class="card-link">
+                  Descubrir autos
+                  <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                </span>
+              </span>
+            </a>
+
+            <a
+              id="motos"
+              class="universe-card"
+              data-card="motos"
+              href="../propuesta-web/motos/"
+              aria-describedby="motos-desc"
+            >
+              <span class="card-media">
+                <img
+                  src="../propuesta-web/assets/honda-moto.jpg"
+                  width="2200"
+                  height="1467"
+                  alt="Motocicleta Honda en movimiento"
+                />
+              </span>
+              <span class="card-body">
+                <strong>Motos</strong>
+                <span id="motos-desc">Libertad y desempeño para disfrutar cada recorrido.</span>
+                <span class="card-link">
+                  Descubrir motos
+                  <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                </span>
+              </span>
+            </a>
+
+            <a
+              id="productos-de-fuerza"
+              class="universe-card"
+              data-card="power"
+              href="../propuesta-web/productos-de-fuerza/"
+              aria-describedby="power-desc"
+            >
+              <span class="card-media">
+                <img
+                  src="../propuesta-web/assets/power-products-editorial.jpg"
+                  width="1536"
+                  height="1024"
+                  alt="Motobomba portátil trabajando en un cultivo"
+                />
+              </span>
+              <span class="card-body">
+                <strong>Productos de fuerza</strong>
+                <span id="power-desc">Potencia confiable para el campo, el trabajo y tus proyectos.</span>
+                <span class="card-link">
+                  Descubrir equipos
+                  <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                </span>
+              </span>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           MANIFESTO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section id="filosofia" class="manifesto-section" aria-labelledby="manifesto-title">
+        <div class="manifesto-inner">
+          <blockquote>
+            <p id="manifesto-title">"El sueño de un hombre es la esperanza que se convierte en realidad solo cuando se trabaja con empeño."</p>
+            <footer>Soichiro Honda, fundador de Honda Motor Co.</footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           TEST DRIVE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section id="test-drive" class="test-drive-section" aria-label="Agendar test drive">
+        <div class="td-container">
+          <!-- Col 1: Header -->
+          <div class="td-header">
+            <h2 class="td-title">Siente la ingeniería.<br>Agenda tu prueba.</h2>
+            <p class="td-desc">Elige la línea de tu interés y conecta con nuestro equipo por WhatsApp al instante.</p>
+          </div>
+          
+          <!-- Col 2: Stacked Cards -->
+          <div class="td-cards-stack">
+            <!-- Autos -->
+            <a href="https://wa.me/?text=Hola%2C%20quiero%20agendar%20un%20test%20drive%20de%20Autos%20Honda." class="td-card" target="_blank" rel="noopener noreferrer">
+              <div class="td-content">
+                <h3>Agendar Test Drive Automóviles</h3>
+                <p>Comunícate con un asesor y programa tu prueba de manejo para vivir el confort de un Honda.</p>
+              </div>
+              <div class="td-btn"><i class="ph ph-arrow-up-right" aria-hidden="true"></i></div>
+            </a>
+
+            <!-- Motos -->
+            <a href="https://wa.me/?text=Hola%2C%20quiero%20agendar%20un%20test%20drive%20de%20Motos%20Honda." class="td-card" target="_blank" rel="noopener noreferrer">
+              <div class="td-content">
+                <h3>Agendar Test Drive Motocicletas</h3>
+                <p>Coordina tu cita y ven a experimentar en persona la potencia y libertad de nuestras líneas.</p>
+              </div>
+              <div class="td-btn"><i class="ph ph-arrow-up-right" aria-hidden="true"></i></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SOPORTE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section id="soporte" class="support-section" aria-labelledby="support-title">
+        <div class="support-inner">
+          <header class="support-heading">
+            <h2 id="support-title">Honda te acompaña después de elegir.</h2>
+            <p>Servicios pensados para que tu experiencia siga siendo confiable durante todo el camino.</p>
+          </header>
+          <div class="support-grid">
+            <article class="support-card">
+              <i class="ph ph-wrench" aria-hidden="true" style="font-size: 32px;"></i>
+              <h3>Mantenimiento</h3>
+              <p>Cuida el desempeño de tu Honda con servicio especializado y acompañamiento técnico.</p>
+              <a href="#contacto">Consultar servicio <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="support-card">
+              <i class="ph ph-shield-check" aria-hidden="true" style="font-size: 32px;"></i>
+              <h3>Garantía oficial</h3>
+              <p>Respaldo directo de la marca para conducir con tranquilidad desde el primer día.</p>
+              <a href="#contacto">Conocer respaldo <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="support-card">
+              <i class="ph ph-calculator" aria-hidden="true" style="font-size: 32px;"></i>
+              <h3>Cotizador</h3>
+              <p>Explora tu próxima Honda y encuentra una alternativa alineada con tus necesidades.</p>
+              <a href="../propuesta-web/autos/">Explorar opciones <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="support-card">
+              <i class="ph ph-money" aria-hidden="true" style="font-size: 32px;"></i>
+              <h3>Financiamiento</h3>
+              <p>Recibe orientación para encontrar un plan que se adapte a tu ritmo y tus objetivos.</p>
+              <a href="#contacto">Solicitar asesoría <span aria-hidden="true">→</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           CONTACTO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section id="contacto" class="contact-section">
+        <div class="contact-container">
+          <header class="contact-header">
+            <h2>Estamos para escucharte.</h2>
+            <p>Comunícate con nosotros para resolver cualquier duda o acércate a nuestros concesionarios para una atención personalizada.</p>
+          </header>
+          <div class="contact-options">
+            <a href="mailto:contacto@honda.com.ec" class="contact-box">
+              <div class="contact-box-icon">
+                <i class="ph ph-envelope-simple"></i>
+              </div>
+              <div class="contact-box-content">
+                <h3>Contacto por correo</h3>
+                <p>Escríbenos y un asesor te responderá a la brevedad.</p>
+              </div>
+              <div class="contact-box-arrow">
+                Enviar correo <i class="ph ph-arrow-right"></i>
+              </div>
+            </a>
+            <a href="#concesionarios" class="contact-box">
+              <div class="contact-box-icon">
+                <i class="ph ph-map-pin"></i>
+              </div>
+              <div class="contact-box-content">
+                <h3>Ver concesionarios</h3>
+                <p>Encuentra tu centro Honda más cercano.</p>
+              </div>
+              <div class="contact-box-arrow">
+                Buscar concesionario <i class="ph ph-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer site-footer--expanded">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="../propuesta-web/assets/honda-power-of-dreams.png" width="2560" height="580" alt="Honda — The Power of Dreams" />
+          <p>Movilidad, tecnología y confianza para acompañar cada camino en Ecuador.</p>
+        </div>
+        <nav class="footer-column" aria-label="Productos Honda">
+          <h2>Productos</h2>
+          <a href="../propuesta-web/autos/">Autos</a>
+          <a href="../propuesta-web/motos/">Motos</a>
+          <a href="../propuesta-web/productos-de-fuerza/">Productos de fuerza</a>
+        </nav>
+        <nav class="footer-column" aria-label="Servicios Honda">
+          <h2>Servicios</h2>
+          <a href="#soporte">Mantenimiento</a>
+          <a href="#soporte">Garantía</a>
+          <a href="#soporte">Financiamiento</a>
+        </nav>
+        <div class="footer-column">
+          <h2>Honda Ecuador</h2>
+          <a href="#universo-honda">Universo Honda</a>
+          <a href="#test-drive">Agendar test drive</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© <span data-year></span> Honda Ecuador. Todos los derechos reservados.</p>
+        <a href="#contenido">Volver arriba</a>
+      </div>
+    </footer>
+  </body>
+</html>

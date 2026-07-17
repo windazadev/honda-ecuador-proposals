@@ -1,0 +1,206 @@
+:root {
+  --brand-red: #cc0000;
+  --brand-red-dark: #a80000;
+  --text: #171717;
+  --text-secondary: #595959;
+  --background: #ffffff;
+  --surface: #f1f1ee;
+  --surface-soft: #f8f8f7;
+  --border: #ddddda;
+  --focus: #155eef;
+  --header-height: 76px;
+  --container: 1560px;
+  --gutter: clamp(20px, 3.6vw, 56px);
+  --gap: clamp(16px, 1.8vw, 26px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--text);
+  background: var(--background);
+  font-family: Poppins, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   COMMON HEADER & BRANDING
+   ========================================================================== */
+.site-header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  width: min(100%, var(--container));
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 160px;
+  height: auto;
+}
+
+.brand span {
+  padding: 1px 7px 2px;
+  display: inline-block;
+  color: #6a6a6a;
+  border: 1px solid #dcdcdc;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1;
+}
+
+.header-inner > p {
+  margin: 0;
+  color: #777777;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--brand-red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   PROTOTYPE DESTINATION PAGES
+   ========================================================================== */
+.destination-page {
+  min-height: 100svh;
+  background: var(--surface);
+}
+
+.destination-main {
+  min-height: calc(100svh - var(--header-height));
+  padding: var(--gutter);
+  display: grid;
+  place-items: center;
+}
+
+.destination-panel {
+  width: min(100%, 1060px);
+  padding: clamp(42px, 7vw, 96px);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 60px;
+  border-top: 4px solid var(--brand-red);
+  background: var(--background);
+}
+
+.destination-panel h1 {
+  margin: 20px 0;
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.destination-panel p:not(.eyebrow) {
+  max-width: 650px;
+  color: var(--text-secondary);
+}
+
+.back-link {
+  min-height: 52px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: var(--brand-red);
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.back-link:hover {
+  background: var(--brand-red-dark);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (GLOBAL & DESTINATION)
+   ========================================================================== */
+@media (max-width: 700px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .brand img {
+    width: 136px;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .header-inner > p {
+    font-size: 0.58rem;
+  }
+
+  .destination-panel {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

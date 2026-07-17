@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Honda Ecuador — propuesta web con hero en carrusel." />
+    <meta name="theme-color" content="#0b0d10" />
+    <title>Honda Ecuador — Carrusel</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Ir al contenido principal</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Honda Ecuador, inicio">
+          <img src="./assets/honda-power-of-dreams.png" width="2560" height="580" alt="Honda — The Power of Dreams" />
+        </a>
+        <nav class="primary-nav" aria-label="Navegación principal">
+          <a href="#autos">Autos</a>
+          <a href="#motos">Motos</a>
+          <a href="#fuerza">Productos de fuerza</a>
+        </nav>
+        <a class="header-cta" href="#test-drive">Agendar test drive</a>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero-carousel" aria-roledescription="carrusel" aria-label="Líneas de Honda Ecuador">
+        <div class="carousel-track" data-track>
+
+          <article class="slide is-active" data-slide id="autos" aria-roledescription="diapositiva" aria-label="1 de 3: Autos">
+            <img class="slide-media" src="./assets/autos-editorial.jpg" alt="Honda WR-V frente a arquitectura contemporánea" fetchpriority="high" />
+            <div class="slide-scrim" aria-hidden="true"></div>
+            <div class="slide-content">
+              <p class="eyebrow">Universo Honda</p>
+              <h1>Diseño y tecnología<br /><span>para cada camino.</span></h1>
+              <p class="lede">Descubre la línea de autos Honda: confianza, eficiencia y una experiencia de manejo que te acompaña siempre.</p>
+              <div class="slide-actions">
+                <a class="btn btn--primary" href="#autos">Descubrir autos</a>
+                <a class="btn btn--ghost" href="#test-drive">Agendar test drive</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide" data-slide id="motos" aria-roledescription="diapositiva" aria-label="2 de 3: Motos">
+            <img class="slide-media" src="./assets/honda-moto.jpg" alt="Motocicleta Honda en movimiento" loading="lazy" />
+            <div class="slide-scrim" aria-hidden="true"></div>
+            <div class="slide-content">
+              <p class="eyebrow">Universo Honda</p>
+              <h1>Libertad y desempeño<br /><span>en cada recorrido.</span></h1>
+              <p class="lede">Motos Honda para la ciudad y la aventura. Potencia confiable y un estilo que se siente en cada kilómetro.</p>
+              <div class="slide-actions">
+                <a class="btn btn--primary" href="#motos">Descubrir motos</a>
+                <a class="btn btn--ghost" href="#test-drive">Agendar test drive</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide" data-slide id="fuerza" aria-roledescription="diapositiva" aria-label="3 de 3: Productos de fuerza">
+            <img class="slide-media" src="./assets/power-products-editorial.jpg" alt="Motobomba portátil trabajando en un cultivo" loading="lazy" />
+            <div class="slide-scrim" aria-hidden="true"></div>
+            <div class="slide-content">
+              <p class="eyebrow">Universo Honda</p>
+              <h1>Potencia confiable<br /><span>para tus proyectos.</span></h1>
+              <p class="lede">Productos de fuerza Honda para el campo, el trabajo y todo lo que impulsa tus ideas hacia adelante.</p>
+              <div class="slide-actions">
+                <a class="btn btn--primary" href="#fuerza">Descubrir equipos</a>
+                <a class="btn btn--ghost" href="#test-drive">Agendar test drive</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--prev" type="button" data-prev aria-label="Anterior">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+        </button>
+        <button class="carousel-arrow carousel-arrow--next" type="button" data-next aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+        </button>
+
+        <div class="carousel-dots" role="tablist" aria-label="Seleccionar diapositiva" data-dots></div>
+      </section>
+    </main>
+  </body>
+</html>

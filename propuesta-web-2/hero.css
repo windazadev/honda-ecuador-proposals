@@ -1,0 +1,229 @@
+/* ==========================================================================
+   UNIVERSE SECTION — Cards that expand in WIDTH on hover
+   ========================================================================== */
+.universe-section {
+  padding: clamp(64px, 8vw, 110px) 0;
+  background: var(--background);
+}
+
+.universe-inner {
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ── Header: title left + description right ── */
+.universe-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: clamp(36px, 4vw, 56px);
+}
+
+.universe-header h2 {
+  margin: 0;
+  font-size: clamp(34px, 3.8vw, 58px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.universe-header-right {
+  max-width: 420px;
+}
+
+.universe-header-right p {
+  margin: 0 0 20px;
+  color: var(--text-secondary);
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.65;
+}
+
+.universe-header-right .universe-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  color: #ffffff;
+  background: var(--brand-red);
+  border-radius: 2px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+
+.universe-header-right .universe-cta:hover {
+  background: var(--brand-red-dark);
+}
+
+/* ── Cards Grid — width interaction ── */
+.universe-cards {
+  display: grid;
+  grid-template-columns: 4fr 2.5fr 1.5fr; /* Autos widest, Motos middle, Power narrowest */
+  gap: clamp(12px, 1vw, 18px);
+  transition: grid-template-columns 420ms var(--ease);
+}
+
+/* Hover states — expand hovered card */
+@media (hover: hover) and (min-width: 821px) {
+  .universe-cards:has(.universe-card[data-card="autos"]:hover) {
+    grid-template-columns: 5fr 1.8fr 1.2fr;
+  }
+
+  .universe-cards:has(.universe-card[data-card="motos"]:hover) {
+    grid-template-columns: 1.8fr 5fr 1.2fr;
+  }
+
+  .universe-cards:has(.universe-card[data-card="power"]:hover) {
+    grid-template-columns: 1.8fr 1.2fr 5fr;
+  }
+}
+
+/* ── Individual Card ── */
+.universe-card {
+  position: relative;
+  height: clamp(420px, 36vw, 520px);
+  border-radius: 0;
+  overflow: hidden;
+  color: #ffffff;
+  background: #161b21;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+  transition: box-shadow 220ms ease;
+}
+
+.universe-card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+/* Card image */
+.universe-card .card-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.universe-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transition: transform 500ms var(--ease);
+}
+
+.universe-card:hover .card-media img {
+  transform: scale(1.04);
+}
+
+/* Card gradient overlay */
+.universe-card .card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.52) 60%, rgba(0, 0, 0, 0.88) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+/* Card body */
+.universe-card .card-body {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: clamp(24px, 2.2vw, 36px);
+}
+
+.universe-card .card-body strong {
+  display: block;
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.universe-card .card-body > span:not(.card-link) {
+  display: block;
+  margin-top: 8px;
+  max-width: 320px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.55;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Card link */
+.universe-card .card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-bottom: 3px;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 13.5px;
+  font-weight: 400;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  transition: border-color 180ms ease;
+}
+
+.universe-card .card-link i {
+  font-size: 18px;
+  transition: transform 180ms ease;
+}
+
+.universe-card:hover .card-link {
+  border-color: var(--brand-red);
+}
+
+.universe-card:hover .card-link i {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   RESPONSIVE — MOBILE
+   ========================================================================== */
+@media (max-width: 820px) {
+  .universe-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .universe-header-right {
+    max-width: 100%;
+  }
+
+  .universe-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .universe-card {
+    height: 320px;
+  }
+
+  .universe-card .card-body > span {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1100px) {
+  .universe-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .universe-card {
+    height: clamp(360px, 32vw, 440px);
+  }
+}

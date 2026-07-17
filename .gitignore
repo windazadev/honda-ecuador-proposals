@@ -1,0 +1,16 @@
+Branding Honda/
+Entregables/
+Eye/
+tmp/
+.claude/
+*.pdf
+*.zip
+*.h2d
+*.ai
+*.png
+*.jpg
+*.docx
+.DS_Store
+!propuesta-*/assets/*.png
+!propuesta-*/assets/*.jpg
+!propuesta-*/assets/*.svg
