@@ -646,7 +646,7 @@
 
 .support-card > svg,
 .support-card > i {
-  color: var(--brand-red, #cc0000);
+  color: #171717;
 }
 
 .support-card h3,
@@ -825,7 +825,7 @@
 
 .contact-box-icon i {
   font-size: 48px;
-  color: #171717;
+  color: var(--brand-red, #cc0000);
   transition: transform 0.3s ease;
 }
 
