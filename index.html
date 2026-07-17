@@ -320,8 +320,13 @@
             // Show left arrow if we have scrolled past a tiny threshold
             arrowLeft.style.display = currentScroll > 20 ? 'flex' : 'none';
             
-            // Show right arrow if we haven't reached the end (within 20px margin)
-            arrowRight.style.display = (currentScroll < maxScroll - 20) ? 'flex' : 'none';
+            // Show right arrow if we haven't reached the end.
+            // If maxScroll is very small, layout might not be ready yet. In that case, default to showing the right arrow.
+            if (maxScroll <= 50) {
+                arrowRight.style.display = 'flex';
+            } else {
+                arrowRight.style.display = (currentScroll < maxScroll - 20) ? 'flex' : 'none';
+            }
         }
 
         // Listen on all possible scroll targets
@@ -332,6 +337,12 @@
             document.body.addEventListener('scroll', updateArrows, { passive: true });
         }
         slider.addEventListener('scroll', updateArrows, { passive: true });
+
+        // Initial setup with delay to allow layout pass
+        updateArrows();
+        setTimeout(updateArrows, 100);
+        setTimeout(updateArrows, 500);
+        window.addEventListener('load', updateArrows);
         
         let isDown = false;
         let startX;
