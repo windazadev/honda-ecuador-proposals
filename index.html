@@ -302,21 +302,36 @@
         const arrowRight = document.querySelector('.arrow-right');
 
         function updateArrows() {
-            if (window.innerWidth > 820) {
-                // Horizontal scrolling
-                const maxScrollLeft = document.documentElement.scrollWidth - window.innerWidth;
-                arrowLeft.style.display = window.scrollX > 10 ? 'flex' : 'none';
-                arrowRight.style.display = window.scrollX >= maxScrollLeft - 10 ? 'none' : 'flex';
-            } else {
-                // Vertical scrolling on mobile
-                const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-                arrowLeft.style.display = window.scrollY > 10 ? 'flex' : 'none';
-                arrowRight.style.display = window.scrollY >= maxScrollTop - 10 ? 'none' : 'flex';
-            }
+            const isHorizontal = window.innerWidth > 820;
+            
+            const currentScroll = isHorizontal 
+                ? (window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || 0)
+                : (window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0);
+                
+            const totalSize = isHorizontal
+                ? Math.max(document.documentElement.scrollWidth, document.body.scrollWidth, slider.scrollWidth || 0)
+                : Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, slider.scrollHeight || 0);
+                
+            const clientSize = isHorizontal ? window.innerWidth : window.innerHeight;
+            const maxScroll = totalSize - clientSize;
+
+            console.log('Arrow debug:', { currentScroll, totalSize, clientSize, maxScroll });
+
+            // Show left arrow if we have scrolled past a tiny threshold
+            arrowLeft.style.display = currentScroll > 20 ? 'flex' : 'none';
+            
+            // Show right arrow if we haven't reached the end (within 20px margin)
+            arrowRight.style.display = (currentScroll < maxScroll - 20) ? 'flex' : 'none';
         }
 
+        // Listen on all possible scroll targets
         window.addEventListener('scroll', updateArrows, { passive: true });
         window.addEventListener('resize', updateArrows, { passive: true });
+        document.addEventListener('scroll', updateArrows, { passive: true });
+        if (document.body) {
+            document.body.addEventListener('scroll', updateArrows, { passive: true });
+        }
+        slider.addEventListener('scroll', updateArrows, { passive: true });
         
         let isDown = false;
         let startX;
@@ -346,6 +361,7 @@
                 left: scrollLeft - walk,
                 behavior: 'auto'
             });
+            updateArrows();
         });
 
         // Mouse wheel logic: translate vertical scroll to horizontal scroll
@@ -357,6 +373,7 @@
                         left: e.deltaY * 2,
                         behavior: 'auto' // CSS scroll-snap handles the smoothness
                     });
+                    setTimeout(updateArrows, 100);
                 }
             }
         }, { passive: true });
