@@ -317,7 +317,7 @@
   position: relative;
   min-height: 0;
   height: clamp(380px, 35vw, 460px);
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -775,7 +775,8 @@
 }
 
 .contact-container {
-  max-width: 1200px;
+  max-width: 100%;
+  padding: 0 40px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -808,7 +809,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .contact-box {
@@ -819,7 +820,7 @@
   padding: 48px 32px;
   background: var(--background);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 0;
   text-decoration: none;
   color: var(--text);
   transition: all 0.3s ease;
