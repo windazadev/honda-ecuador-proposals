@@ -519,15 +519,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 40px 48px;
+  padding: 40px;
   background: transparent;
   border: none;
   border-right: 1px solid var(--border);
   border-radius: 0;
 }
 
+.support-card:first-child {
+  padding-left: 0 !important;
+}
+
 .support-card:last-child {
   border-right: none;
+  padding-right: 0 !important;
 }
 
 .support-card > i {
@@ -584,6 +589,9 @@
   }
   .support-card:nth-child(n+3) {
     border-bottom: none;
+  }
+  .support-card:first-child {
+    padding-left: 0 !important;
   }
 }
 
