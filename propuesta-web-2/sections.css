@@ -511,7 +511,7 @@
 .support-grid {
   margin: 0;
   display: grid;
-  grid-template-columns: auto repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
 }
 
@@ -519,15 +519,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 40px;
+  padding: 40px 48px;
   background: transparent;
   border: none;
   border-right: 1px solid var(--border);
   border-radius: 0;
-}
-
-.support-card:first-child {
-  padding-right: 16px;
 }
 
 .support-card:last-child {
@@ -575,7 +571,7 @@
 
 @media (max-width: 1024px) {
   .support-grid {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0;
   }
   .support-card {
