@@ -25,6 +25,8 @@
             /* Hide scrollbar */
             scrollbar-width: none; 
             -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
         }
         body::-webkit-scrollbar {
             display: none;
@@ -91,6 +93,31 @@
             letter-spacing: 2px;
             color: #ccc;
         }
+        
+        .arrow-right {
+            position: fixed;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #fff;
+            z-index: 5;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .arrow-right:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.1);
+        }
 
         /* Background Line */
         .line {
@@ -108,9 +135,9 @@
             display: flex;
             align-items: center;
             height: 100vh;
-            padding-left: 25vw;
-            padding-right: 25vw;
-            gap: 20vw;
+            padding-left: 20vw;
+            padding-right: 20vw;
+            gap: 30vw;
             width: max-content;
         }
 
@@ -122,6 +149,7 @@
             align-items: center;
             cursor: pointer;
             z-index: 2;
+            scroll-snap-align: center;
         }
 
         .project-image {
@@ -171,17 +199,21 @@
 
         /* Mobile specific adjustments */
         @media (max-width: 820px) {
+            html, body {
+                scroll-snap-type: y mandatory;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
             .scroll-container {
                 flex-direction: column;
                 justify-content: flex-start;
                 padding: 120px 20px 60px;
-                gap: 100px;
+                gap: 60px;
                 height: auto;
                 width: 100%;
             }
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
+            .project {
+                scroll-snap-align: start;
             }
             .project-image {
                 width: 90vw;
@@ -193,7 +225,7 @@
                 top: -40px;
                 text-shadow: 0 4px 20px rgba(0,0,0,0.8);
             }
-            .drag-label, .line, .menu-label {
+            .drag-label, .line, .menu-label, .arrow-right {
                 display: none;
             }
             header {
@@ -214,8 +246,13 @@
     
     <div class="drag-label">
         Explorar
-        <span>Arrastra para navegar</span>
+        <span>Desliza para navegar</span>
     </div>
+
+    <!-- Visible arrow button to skip to the next -->
+    <button class="arrow-right" onclick="slideNext()">
+        &rarr;
+    </button>
 
     <div class="line"></div>
 
@@ -237,18 +274,13 @@
 
     </div>
 
-    <!-- Script to enable click-and-drag horizontal scrolling on desktop -->
     <script>
         const slider = document.querySelector('.scroll-container');
         let isDown = false;
         let startX;
         let scrollLeft;
 
-        // Ensure vertical scrolling is blocked on desktop
-        if(window.innerWidth > 820) {
-            document.body.style.overflowY = 'hidden';
-        }
-
+        // Click to drag functionality
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
             slider.style.cursor = 'grabbing';
@@ -257,31 +289,43 @@
         });
         slider.addEventListener('mouseleave', () => {
             isDown = false;
-            slider.style.cursor = 'default';
+            slider.style.cursor = 'pointer';
         });
         slider.addEventListener('mouseup', () => {
             isDown = false;
-            slider.style.cursor = 'default';
+            slider.style.cursor = 'pointer';
         });
         slider.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
             const walk = (x - startX) * 2; 
-            window.scrollTo(scrollLeft - walk, 0);
+            window.scrollTo({
+                left: scrollLeft - walk,
+                behavior: 'auto'
+            });
         });
-        
-        // Enable mouse wheel horizontal scrolling
+
+        // Mouse wheel logic: translate vertical scroll to horizontal scroll
         window.addEventListener('wheel', (e) => {
             if(window.innerWidth > 820) {
-                // Determine scrolling direction and move horizontally
-                e.preventDefault();
-                window.scrollBy({
-                    left: e.deltaY > 0 ? 100 : -100,
-                    behavior: 'auto'
-                });
+                // If it's a vertical scroll gesture (e.g. standard mouse wheel)
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    window.scrollBy({
+                        left: e.deltaY * 2,
+                        behavior: 'auto' // CSS scroll-snap handles the smoothness
+                    });
+                }
             }
-        }, { passive: false });
+        }, { passive: true });
+
+        // Button functionality to go to next
+        function slideNext() {
+            window.scrollBy({
+                left: window.innerWidth * 0.6,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
 </html>
