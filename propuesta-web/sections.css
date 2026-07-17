@@ -646,7 +646,7 @@
 
 .support-card > svg,
 .support-card > i {
-  color: #171717;
+  color: var(--brand-red, #cc0000);
 }
 
 .support-card h3,
